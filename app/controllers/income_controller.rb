@@ -1,6 +1,6 @@
-class IncomeController < ApplicationController::Base
+class IncomeController < ApplicationController
 
     def show
-        :status => :ok, :message => "WIP"
+        :status => :ok
     end
 end
