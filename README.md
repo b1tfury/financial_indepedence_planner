@@ -6,19 +6,27 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+    * 3.1.2
 
 * System dependencies
+    * docker
 
 * Configuration
 
 * Database creation
+  ```ruby
+    bundle exec rake db:create
+  ```
 
 * Database initialization
+* How to run db
+
+```ruby
+docker - compose up - d
+```
 
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```ruby
+bundle exec rails server
+```
