@@ -66,5 +66,22 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
 
       expect(actual_income_tax).to equal(expected_income_tax)
     end
+    it 'returns additional 20% surcharge on income tax on amount between 1 crore and 2 crore' do
+      total_income_amount = 17500000
+      ONE_CRORE = 10000000
+      extra_income_in_this_income_range = total_income_amount - ONE_CRORE
+      income_tax_calculator_till_one_crore = IncomeTaxCalculator.new(ONE_CRORE)
+      income_tax_on_one_crore = income_tax_calculator_till_one_crore.get_tax
+
+      income_tax_on_extra_income_in_this_range = extra_income_in_this_income_range * 0.30
+      surcharge_tax_on_extra_income_in_this_range = income_tax_on_extra_income_in_this_range * 0.20
+
+      expected_income_tax = income_tax_on_one_crore + income_tax_on_extra_income_in_this_range + surcharge_tax_on_extra_income_in_this_range
+
+      income_tax_calculator = IncomeTaxCalculator.new(total_income_amount)
+      actual_income_tax = income_tax_calculator.get_tax
+
+      expect(actual_income_tax).to equal(expected_income_tax)
+    end
   end
 end
