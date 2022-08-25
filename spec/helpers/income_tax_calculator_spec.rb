@@ -5,7 +5,7 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
     it 'total tax on total income should be 0' do
       income_tax = IncomeTaxCalculator.new(50000)
 
-      minimum_taxable_income = income_tax.calculate_minimum_taxable_income
+      minimum_taxable_income = income_tax.get_tax
 
       expect(minimum_taxable_income).to be_eql(0.0)
     end
@@ -15,7 +15,7 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
     it 'returns 5% of income for the range between 2.5 lac to 5 lacs' do
       income_tax = IncomeTaxCalculator.new(450000)
 
-      minimum_taxable_income = income_tax.calculate_minimum_taxable_income
+      minimum_taxable_income = income_tax.get_tax
 
       expect(minimum_taxable_income).to be_eql(10000.0)
     end
@@ -24,11 +24,11 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
       taxable_amount = 950000
       extra_amount_in_this_income_range = taxable_amount - 500000
       another_income_tax_calculator = IncomeTaxCalculator.new(500000)
-      income_tax_on_500000 = another_income_tax_calculator.calculate_minimum_taxable_income
+      income_tax_on_500000 = another_income_tax_calculator.get_tax
       total_expected_income_tax = income_tax_on_500000 + extra_amount_in_this_income_range * 0.20
 
       income_tax_calculator = IncomeTaxCalculator.new(taxable_amount)
-      minimum_taxable_income = income_tax_calculator.calculate_minimum_taxable_income
+      minimum_taxable_income = income_tax_calculator.get_tax
 
       expect(minimum_taxable_income).to be_eql(total_expected_income_tax)
     end
@@ -38,11 +38,11 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
       TEN_LACS = 1000000
       extra_income_in_this_income_range = total_income_amount - TEN_LACS
       income_tax_calculator_till_10_lac = IncomeTaxCalculator.new(TEN_LACS)
-      income_tax_on_10_lac = income_tax_calculator_till_10_lac.calculate_minimum_taxable_income
+      income_tax_on_10_lac = income_tax_calculator_till_10_lac.get_tax
       expected_taxable_income = income_tax_on_10_lac + extra_income_in_this_income_range * 0.30
 
       income_tax_calculator = IncomeTaxCalculator.new(total_income_amount)
-      taxable_income = income_tax_calculator.calculate_minimum_taxable_income
+      taxable_income = income_tax_calculator.get_tax
 
       expect(taxable_income).to be_eql(expected_taxable_income)
     end

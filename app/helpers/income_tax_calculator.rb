@@ -10,7 +10,7 @@ class IncomeTaxCalculator
     @total_income = total_income
   end
 
-  def calculate_minimum_taxable_income
+  def get_tax
     if @total_income <= MAX_NON_TAXABLE_INCOME_AMOUNT
       0.0
     elsif @total_income <= MAX_AMOUNT_IN_TAX_SLAB_1
