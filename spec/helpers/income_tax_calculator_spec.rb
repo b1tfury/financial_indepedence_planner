@@ -11,7 +11,7 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
     end
   end
 
-  context 'when total income is more than minimum taxable income' do
+  context 'when total income is more than minimum taxable income but less than 50 lacs' do
     it 'returns 5% of income for the range between 2.5 lac to 5 lacs' do
       income_tax = IncomeTaxCalculator.new(450000)
 
@@ -46,6 +46,25 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
 
       expect(taxable_income).to be_eql(expected_taxable_income)
     end
+  end
 
+  context 'when total income is more than 50 lacs' do
+    it 'returns additional 10% surcharge on income tax on amount between 50 lacs and 1 crore' do
+      total_income_amount = 7500000
+      FIFTY_LACS = 5000000
+      extra_income_in_this_income_range = total_income_amount - FIFTY_LACS
+      income_tax_calculator_till_50_lacs = IncomeTaxCalculator.new(FIFTY_LACS)
+      income_tax_on_50_lac = income_tax_calculator_till_50_lacs.get_tax
+
+      income_tax_on_extra_income_in_this_range = extra_income_in_this_income_range * 0.30
+      surcharge_tax_on_extra_income_in_this_range = income_tax_on_extra_income_in_this_range * 0.10
+
+      expected_income_tax = income_tax_on_50_lac + income_tax_on_extra_income_in_this_range + surcharge_tax_on_extra_income_in_this_range
+
+      income_tax_calculator = IncomeTaxCalculator.new(total_income_amount)
+      actual_income_tax = income_tax_calculator.get_tax
+
+      expect(actual_income_tax).to equal(expected_income_tax)
+    end
   end
 end
