@@ -20,5 +20,17 @@ RSpec.describe IncomeTaxCalculator, type: :helper do
       expect(minimum_taxable_income).to be_eql(10000.0)
     end
 
+    it 'returns additional 20% of income for range between 5 lacs to 10 lacs' do
+      taxable_amount = 950000
+      extra_amount_in_this_income_range = taxable_amount - 500000
+      income_tax_calculator = IncomeTaxCalculator.new(taxable_amount)
+      another_income_tax_calculator = IncomeTaxCalculator.new(500000)
+      income_tax_on_500000 = another_income_tax_calculator.calculate_minimum_taxable_income
+      total_expected_income_tax = income_tax_on_500000 + extra_amount_in_this_income_range * 0.20
+
+      minimum_taxable_income = income_tax_calculator.calculate_minimum_taxable_income
+
+      expect(minimum_taxable_income).to be_eql(total_expected_income_tax)
+    end
   end
 end
