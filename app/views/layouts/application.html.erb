@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FinancialIndepedencePlanner</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>FinancialIndepedencePlanner</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  </head>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/">Financial Independence Planner</a>
+  <a class="btn btn-outline-primary" href="/tax_calculator" role="button">
+    Tax Calculator
+  </a>
+  <a class="btn btn-outline-primary" href="/login" role="button">
+    Login
+  </a>
+  <div style="padding-left: 10px;">
+    <a class="btn btn-outline-success" href="/signup" role="button">
+      Sign Up
+    </a>
+  </div>
+</nav>
+<%= yield %>
+</body>
 </html>
+
