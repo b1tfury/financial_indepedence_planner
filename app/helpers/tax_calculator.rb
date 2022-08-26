@@ -1,4 +1,4 @@
-class IncomeTaxCalculator
+class TaxCalculator
   NO_INCOME_TAX = 0.0
   MAX_NON_TAXABLE_INCOME_AMOUNT = 250000
   INCOME_TAX_RATE_FOR_INCOME_RANGE_250000_AND_500000 = 0.05
@@ -18,7 +18,7 @@ class IncomeTaxCalculator
     @total_income = total_income
   end
 
-  def get_tax
+  def get_total_tax
     (calculate_income_tax_only + calculate_surcharge_tax_only) * (1 + HEALTH_CESS_RATE)
   end
 
