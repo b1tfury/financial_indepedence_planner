@@ -1,5 +1,5 @@
 class TaxCalculatorController < ApplicationController
   def show
-    render status: :ok
+    render json: { status: "ok" }, status: :ok
   end
 end
